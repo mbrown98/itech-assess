@@ -25,16 +25,27 @@ mongoose.connection.on("error", (err) => {
   console.error("Error connecting to mongo", err);
 });
 
-app.get("/students", (req, res) => {
-  res.send([{ firstName: "Bob", lastName: "Jones" }]);
+app.get("/students", async (req, res) => {
+  const students = await Student.find({});
+
+  res.send(students.reverse());
 });
 
-app.post("/students", async (req, res) => {
+app.post("/addStudent", async (req, res) => {
   const { firstName, lastName } = req.body;
   try {
     const track = new Student({ firstName, lastName });
     await track.save();
     res.status(200).send(track);
+  } catch (err) {
+    res.status(422).send({ error: err.message });
+  }
+});
+
+app.post("/deleteAll", async (req, res) => {
+  try {
+    await Student.deleteMany({});
+    res.status(200).send("deleted");
   } catch (err) {
     res.status(422).send({ error: err.message });
   }
