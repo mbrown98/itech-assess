@@ -26,7 +26,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{ fontWeight: "bold", fontSize: 60, flex: 2, marginTop: 20 }}>
+      <h1
+        style={{ fontWeight: "bold", fontSize: 60, flex: 2, marginTop: 20 }}
+        className="titleHeader"
+      >
         CLASSROOM
       </h1>
       <FormsInputs getStudents={getStudents} />

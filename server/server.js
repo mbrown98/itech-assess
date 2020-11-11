@@ -16,6 +16,7 @@ const Student = mongoose.model("Student");
 
 //creating connection with Mongo Atlas Cluster
 //cluster is hosted on AWS in the N Virginia Region
+//mongo uri would be stored as .env variable in deployment environment
 mongoose.connect(
   "mongodb+srv://matt:brown@cluster0.mav4r.mongodb.net/<dbname>?retryWrites=true&w=majority",
   {

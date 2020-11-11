@@ -61,7 +61,7 @@ const FormsInputs = ({ getStudents }) => {
         />
         {!rechaptaApproved && (
           //using popular ReChaptcha NPM module
-          //for deployment sitekey would be stored safely and not stored in Git code
+          //for deployment sitekey would be stored safely (.config .env) and not stored in Git code
           <ReCAPTCHA
             sitekey="6LdIhOEZAAAAAE9ngmtAC1584OO10WdnwBrd_8eX"
             onChange={() => setRechaptaApproved(true)}
