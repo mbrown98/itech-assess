@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -16,10 +17,10 @@ const Student = mongoose.model("Student");
 
 //creating connection with Mongo Atlas Cluster
 //cluster is hosted on AWS in the N Virginia Region
-mongoose.connect(
-  "mongodb+srv://matt:brown@cluster0.mav4r.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 mongoose.connection.on("connected", () => {
   console.log("Connected to mongo instance");
