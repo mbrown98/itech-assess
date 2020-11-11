@@ -19,7 +19,7 @@ const StudentsTable = ({ students }) => {
         <tbody>
           {students.map((student) => {
             return (
-              <tr style={{ height: 5 }}>
+              <tr>
                 <td> {student.firstName}</td>
                 <td>{student.lastName}</td>
               </tr>
@@ -27,7 +27,11 @@ const StudentsTable = ({ students }) => {
           })}
         </tbody>
       </Table>
-      {!students.length && <div style={{ flex: 1 }}>Classroom is Empty</div>}
+
+      {!students.length && (
+        //will only display when students array is empty
+        <div style={{ flex: 1 }}>Classroom is Empty</div>
+      )}
     </>
   );
 };

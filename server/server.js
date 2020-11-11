@@ -1,3 +1,4 @@
+//registering Student model
 require("./models/Student");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -13,6 +14,8 @@ const PORT = 8080;
 
 const Student = mongoose.model("Student");
 
+//creating connection with Mongo Atlas Cluster
+//cluster is hosted on AWS in the N Virginia Region
 mongoose.connect(
   "mongodb+srv://matt:brown@cluster0.mav4r.mongodb.net/<dbname>?retryWrites=true&w=majority",
   { useNewUrlParser: true }
@@ -27,18 +30,18 @@ mongoose.connection.on("error", (err) => {
 
 app.get("/students", async (req, res) => {
   const students = await Student.find({});
-
   res.send(students.reverse());
 });
 
 app.post("/addStudent", async (req, res) => {
+  //destructing firstName and lastName from the req.body
   const { firstName, lastName } = req.body;
   try {
     const track = new Student({ firstName, lastName });
     await track.save();
     res.status(200).send(track);
   } catch (err) {
-    res.status(422).send({ error: err.message });
+    res.send({ error: err.message });
   }
 });
 
@@ -47,7 +50,7 @@ app.post("/deleteAll", async (req, res) => {
     await Student.deleteMany({});
     res.status(200).send("deleted");
   } catch (err) {
-    res.status(422).send({ error: err.message });
+    res.send({ error: err.message });
   }
 });
 
